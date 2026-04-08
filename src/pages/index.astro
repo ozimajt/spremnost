@@ -1,0 +1,53 @@
+---
+/**
+ * SPREMNOST — СПРЕМНОСТ
+ * Modular survival rack system
+ * spremnost.world
+ */
+import RackApp from '../components/rack/RackApp.svelte';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>СПРЕМНОСТ — Spremnost Control Panel</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/dseg@0.46.0/css/dseg.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="scanline-bar"></div>
+
+    <div class="boot-screen">
+      <div class="boot-line">[  OK  ] ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ SPREMNOST v0.1.0</div>
+      <div class="boot-line">[  OK  ] Načítavanie jadrových modulov..........</div>
+      <div class="boot-line">[  OK  ] Pripájanie /dev/indexeddb na /local</div>
+      <div class="boot-line">[  OK  ] Uspostavljanje veze: sydney.supabase.co</div>
+      <div class="boot-line">[  OK  ] Service worker registrovaný: serwist@9.x</div>
+      <div class="boot-line">[  OK  ] Архив карт PMTiles: perth-metro [108 МБ]</div>
+      <div class="boot-line">[  OK  ] MGRS koordinatna mreža: Zone 50H MP/NP</div>
+      <div class="boot-line">[  OK  ] Криптографский модуль libsodium: УЧИТАН</div>
+      <div class="boot-line">[  OK  ] Offline rad: 0 čakajúcich mutácií</div>
+      <div class="boot-line">[  OK  ] Članovi: 0 / 4 ČAKÁ NA AKTIVÁCIU</div>
+      <div class="boot-line warn">[WARN ] Externí komunikácie: DEGRADOVANO</div>
+      <div class="boot-line">[  OK  ] Radiačni senzor: 0.12 μSv/h NÓMALNO</div>
+      <div class="boot-line">[  OK  ] Termálna kontrola jadra: NOMINAL 42°C</div>
+      <div class="boot-line">[  OK  ] Gotovnost za izazov autentifikacije</div>
+      <div class="boot-line">[  OK  ] Dnevnik sistemskih događaja: AKTIVAN</div>
+      <div class="boot-line">[  OK  ] Bezpečnostné protokoly nahrané</div>
+      <div class="boot-line">[  OK  ] Watchdog timer armed</div>
+      <div class="boot-line">>>> SYSTEM READY — JEDNOTA · ОТПОРНОСТ · ЗНАНИЕ <span class="boot-cursor"></span></div>
+    </div>
+
+    <RackApp client:load />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/base.css';
+  @import '../styles/panel.css';
+  @import '../styles/controls.css';
+</style>

@@ -1,0 +1,135 @@
+/* ============ BASE — reset, body, CRT overlays ============ */
+@import './tokens.css';
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--panel-800);
+  color: var(--panel-800);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* CRT scanline overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
+  pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+}
+
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none; z-index: 9998;
+}
+
+/* Scanning bar */
+.scanline-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 106px;
+  background: linear-gradient(to bottom, transparent, rgba(136,204,68,0.04), transparent);
+  pointer-events: none; z-index: 9997;
+  animation: scan 8s linear infinite;
+}
+@keyframes scan {
+  0% { transform: translateY(-106px); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Boot sequence */
+.boot-screen {
+  position: fixed; inset: 0;
+  background: var(--panel-800); z-index: 10000;
+  font-family: var(--font-crt);
+  font-size: clamp(16px, 2.2vw, 27px);
+  color: var(--lcd-text);
+  padding: clamp(20px, 4vw, 53px);
+  overflow: hidden;
+  animation: bootFade 0.5s ease-out 6.5s forwards;
+}
+@keyframes bootFade { to { opacity: 0; pointer-events: none; visibility: hidden; } }
+
+.boot-line {
+  opacity: 0;
+  animation: bootLine 0.3s ease-out forwards;
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px var(--lcd-text);
+  word-break: break-word;
+}
+@keyframes bootLine {
+  from { opacity: 0; transform: translateX(-13px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.boot-line:nth-child(1)  { animation-delay: 0.30s; }
+.boot-line:nth-child(2)  { animation-delay: 0.55s; }
+.boot-line:nth-child(3)  { animation-delay: 0.80s; }
+.boot-line:nth-child(4)  { animation-delay: 1.05s; }
+.boot-line:nth-child(5)  { animation-delay: 1.30s; }
+.boot-line:nth-child(6)  { animation-delay: 1.55s; }
+.boot-line:nth-child(7)  { animation-delay: 1.80s; }
+.boot-line:nth-child(8)  { animation-delay: 2.05s; }
+.boot-line:nth-child(9)  { animation-delay: 2.30s; }
+.boot-line:nth-child(10) { animation-delay: 2.55s; }
+.boot-line:nth-child(11) { animation-delay: 2.80s; }
+.boot-line:nth-child(12) { animation-delay: 3.05s; }
+.boot-line:nth-child(13) { animation-delay: 3.30s; }
+.boot-line:nth-child(14) { animation-delay: 3.55s; }
+.boot-line:nth-child(15) { animation-delay: 3.80s; }
+.boot-line:nth-child(16) { animation-delay: 4.05s; }
+.boot-line:nth-child(17) { animation-delay: 4.30s; }
+.boot-line:nth-child(18) { animation-delay: 4.60s; color: var(--signal-green); font-weight: bold; }
+.boot-line.warn { color: var(--signal-amber); }
+
+.boot-cursor {
+  display: inline-block; width: 13px; height: 24px;
+  background: var(--lcd-text);
+  animation: blink 0.8s steps(1) infinite;
+  vertical-align: middle;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Control room */
+.control-room {
+  min-height: 100vh;
+  background: var(--panel-100);
+  background-image:
+    linear-gradient(135deg, transparent 49%, rgba(0,0,0,0.03) 50%, transparent 51%),
+    radial-gradient(circle at 20% 0%, rgba(80,83,60,0.08), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(80,83,60,0.08), transparent 50%);
+  padding: clamp(12px, 2vw, 21px);
+  opacity: 0;
+  animation: roomFadeIn 1s ease-out 6.7s forwards;
+}
+@keyframes roomFadeIn { to { opacity: 1; } }
+
+/* Grid layout */
+.grid-row {
+  display: grid;
+  gap: clamp(14px, 1.8vw, 21px);
+  margin-bottom: clamp(14px, 1.8vw, 21px);
+}
+.row-1 { grid-template-columns: 30fr 50fr 20fr; }
+.row-2 { grid-template-columns: 40fr 60fr; }
+.row-3 { grid-template-columns: 1fr 1fr; }
+
+@media (max-width: 1400px) {
+  .row-1 { grid-template-columns: 1fr 1fr; }
+  .row-1 > :nth-child(3) { grid-column: 1 / -1; }
+}
+@media (max-width: 1100px) {
+  .row-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .row-1 { grid-template-columns: 1fr; }
+  .row-1 > :nth-child(3) { grid-column: auto; }
+  .row-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .system-status { width: 100%; justify-content: space-between; }
+}
