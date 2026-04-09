@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Share+Tech+Mono&family=VT323&display=swap');
+@import "tailwindcss";
+
+:root {
+  --panel-100: #C5CBA8;
+  --panel-200: #B8C4A0;
+  --panel-300: #9CAF88;
+  --panel-400: #8B9A76;
+  --panel-500: #679267;
+  --panel-600: #50533C;
+  --panel-700: #3A3F2C;
+  --panel-800: #2C2E25;
+  --cream: #E8DCC8;
+  --signal-red: #CD2500;
+  --signal-green: #33CC33;
+  --signal-amber: #E6A817;
+  --lcd-bg: #1a2010;
+  --lcd-text: #88CC44;
+  --steel: #8C8670;
+  --bakelite: #2a2419;
+  --soviet-red: #B22222;
+  --navy: #202867;
+
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-tech: 'Share Tech Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-crt: 'VT323', 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #111;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
